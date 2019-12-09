@@ -1,0 +1,18 @@
+[
+  {
+    "CompletedPaymentCount": 0,
+    "Points": 0
+  },
+  {
+    "CompletedPaymentCount": 1,
+    "Points": 2
+  },
+  {
+    "CompletedPaymentCount": 2,
+    "Points": 3
+  },
+  {
+    "CompletedPaymentCount": 3,
+    "Points": 4
+  }
+]

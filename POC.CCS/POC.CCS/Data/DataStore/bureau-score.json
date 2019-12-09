@@ -1,0 +1,22 @@
+[
+  {
+    "start": 0,
+    "end": 450,
+    "points": -1
+  },
+  {
+    "start": 451,
+    "end": 700,
+    "points": 1
+  },
+  {
+    "start": 701,
+    "end": 850,
+    "points": 2
+  },
+  {
+    "start": 851,
+    "end": 1000,
+    "points": 3
+  }
+]
