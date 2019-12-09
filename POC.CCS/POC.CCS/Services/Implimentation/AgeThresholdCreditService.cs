@@ -14,16 +14,19 @@
             this.repository = repository;
         }
 
-       public AgeThresholdCredit GetAgeThresholdCredit(int age)
+        public AgeThresholdCredit GetAgeThresholdCredit(int age)
         {
             var minAge = this.repository.GetAll().ToList().Max(x => x.StartAge);
 
             if (age > minAge)
             {
-                return new AgeThresholdCredit { MaximumPoints = 0 } ;
+                return new AgeThresholdCredit { MaximumPoints = 0 };
             }
 
-            return this.repository.Get(x => age >= x.StartAge && age <= x.EndAge);
+            var ageThresholdCredit = this.repository.Get(x => age >= x.StartAge && age <= x.EndAge);
+
+            if (null == ageThresholdCredit) { return new AgeThresholdCredit(); }
+            return ageThresholdCredit;
         }
     }
 }

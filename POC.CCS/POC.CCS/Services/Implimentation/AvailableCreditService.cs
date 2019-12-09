@@ -23,7 +23,10 @@
                 return this.repository.Get(x => maxTotalPoints == x.TotalPoints);
             }
 
-            return this.repository.Get(x => points == x.TotalPoints);
+            var availableCredit =  this.repository.Get(x => points == x.TotalPoints);
+
+            if (null == availableCredit) { return new AvailableCredit(); }
+            return availableCredit;
         }
 
     }

@@ -15,13 +15,17 @@
 
         public CompletedPayment GetCompletedPayment(int completedPaymentCount)
         {
+
             var maxCompletedPayment = this.repository.GetAll().ToList().Max(x => x.CompletedPaymentCount);
             if (completedPaymentCount > maxCompletedPayment)
             { 
                 return this.repository.Get(x => maxCompletedPayment == x.CompletedPaymentCount);
             }
 
-            return this.repository.Get(x => completedPaymentCount == x.CompletedPaymentCount);
+            var completedPayment = this.repository.Get(x => completedPaymentCount == x.CompletedPaymentCount);
+
+            if (null == completedPayment) { return new CompletedPayment(); }
+            return completedPayment;
         }
     }
 }

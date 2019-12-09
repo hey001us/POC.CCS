@@ -21,7 +21,10 @@
                 return this.repository.Get(x => maxMissedPaymentCount.MissedPaymentCount == x.MissedPaymentCount);
             }
 
-            return this.repository.Get(x => missedPaymentCount <= x.MissedPaymentCount);
+            var missedPayment = this.repository.Get(x => missedPaymentCount <= x.MissedPaymentCount);
+
+            if (null == missedPayment) { return new MissedPayment(); }
+            return missedPayment;
         }
     }
 }
