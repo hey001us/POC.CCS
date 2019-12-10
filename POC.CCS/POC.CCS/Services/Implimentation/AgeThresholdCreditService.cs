@@ -1,6 +1,5 @@
 ﻿namespace POC.CCS.Services.Implimentation
 {
-    using System.Collections.Generic;
     using System.Linq;
     using POC.CCS.Data.Interface;
     using POC.CCS.Models;
@@ -16,9 +15,9 @@
 
         public AgeThresholdCredit GetAgeThresholdCredit(int age)
         {
-            var minAge = this.repository.GetAll().ToList().Max(x => x.StartAge);
+            var minAge = this.repository.GetAll().ToList().Min(x => x.StartAge);
 
-            if (age > minAge)
+            if (age < minAge)
             {
                 return new AgeThresholdCredit { MaximumPoints = 0 };
             }
