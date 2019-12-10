@@ -24,7 +24,6 @@
             this.completedPaymentService = completedPaymentService;
             this.availableCreditService = availableCreditService;
             this.ageThresholdCreditService = ageThresholdCreditService;
-
         }
 
         public decimal CalculateCredit(Customer customer)
@@ -37,17 +36,23 @@
 
         private int CalculateAgeCreditPoints(Customer customer)
         {
-            var bs = this.bureauScoreService.GetBureauScore(customer.BureauScore);
-            var mp = this.missedPaymentService.GetMissedPayment(customer.MissedPaymentCount);
-            var cp = this.completedPaymentService.GetCompletedPayment(customer.CompletedPaymentCount);
-
-            var totalPoints = (bs.Points + mp.Points + cp.Points);
+            var totalPoints = CalculateTotalPoints(customer);
             var ageThresholdPoints = this.ageThresholdCreditService.GetAgeThresholdCredit(customer.AgeInYears);
 
             if (totalPoints > ageThresholdPoints.MaximumPoints)
             {
                 return ageThresholdPoints.MaximumPoints;
             }
+            return totalPoints;
+        }
+        private int CalculateTotalPoints(Customer customer)
+        {
+            var bs = this.bureauScoreService.GetBureauScore(customer.BureauScore);
+            var mp = this.missedPaymentService.GetMissedPayment(customer.MissedPaymentCount);
+            var cp = this.completedPaymentService.GetCompletedPayment(customer.CompletedPaymentCount);
+
+            var totalPoints = (bs.Points + mp.Points + cp.Points);
+
             return totalPoints;
         }
     }
